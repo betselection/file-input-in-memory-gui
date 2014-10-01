@@ -8,6 +8,7 @@
     <RootNamespace>File__Input___40_in_45_memory_43_GUI_41_</RootNamespace>
     <AssemblyName>File__Input___40_in_45_memory_43_GUI_41_</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

@@ -217,7 +217,7 @@ namespace File__Input___40_in_45_memory_43_GUI_41_
         }
 
         /// <summary>
-        /// Browses the button_ click.
+        /// Browse button click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -225,40 +225,40 @@ namespace File__Input___40_in_45_memory_43_GUI_41_
         {
             // Open file dialog
             if (this.mainOpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
                 {
-                    try
+                    /* Read file to memory */
+
+                    // Reset pointer
+                    this.pointer = 0;
+
+                    // Reset lines list
+                    this.lines.Clear();
+
+                    // Make use of StreamReader
+                    using (StreamReader sr = new StreamReader(this.mainOpenFileDialog.FileName))
                     {
-                        /* Read file to memory */
+                        // Current line
+                        string line;
 
-                        // Reset pointer
-                        this.pointer = 0;
-
-                        // Reset lines list
-                        this.lines.Clear();
-
-                        // Make use of StreamReader
-                        using (StreamReader sr = new StreamReader(this.mainOpenFileDialog.FileName))
-                            {
-                                // Current line
-                                string line;
-
-                                // Iterate through lines
-                                while ((line = sr.ReadLine()) != null)
-                                    {
-                                        // Add current line
-                                        this.lines.Add(line);
-                                    }
-                            }
-
-                        // Update status
-                        this.statusToolStripStatusLabel.Text = "Read: " + this.lines.Count + " lines";
+                        // Iterate through lines
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            // Add current line
+                            this.lines.Add(line);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        // Error message
-                        MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message, "File read error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+
+                    // Update status
+                    this.statusToolStripStatusLabel.Text = "Read: " + this.lines.Count + " lines";
                 }
+                catch (Exception ex)
+                {
+                    // Error message
+                        MessageBox.Show("Error: Could not read file from disk." + Environment.NewLine + "Error message: " + ex.Message, "File read error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         /// <summary>
@@ -270,10 +270,10 @@ namespace File__Input___40_in_45_memory_43_GUI_41_
         {
             // Check there's something to work with and pointer is within range
             if (this.lines.Count < 1 || this.pointer > (this.lines.Count - 1))
-                {
-                    // Exit
-                    return;
-                }
+            {
+                // Exit
+                return;
+            }
 
             // Send current input
             this.marshal.GetType().InvokeMember("Input", BindingFlags.InvokeMethod, null, this.marshal, new object[] { this.lines[this.pointer] });
@@ -294,10 +294,10 @@ namespace File__Input___40_in_45_memory_43_GUI_41_
 
             // Check list pointer is in use
             if (this.pointer > 0)
-                {
-                    // Decrement list pointer
-                    this.pointer--;
-                }
+            {
+                // Decrement list pointer
+                this.pointer--;
+            }
         }
 
         /// <summary>
@@ -309,25 +309,25 @@ namespace File__Input___40_in_45_memory_43_GUI_41_
         {
             // Check
             if (!this.isRunning)
-                {
-                    // Change button caption
-                    this.runButton.Text = "S&top";
+            {
+                // Change button caption
+                this.runButton.Text = "S&top";
 
-                    // Set flag
-                    this.isRunning = true;
+                // Set flag
+                this.isRunning = true;
 
-                    // TODO Start run code
-                }
+                // TODO Start run code
+            }
             else
-                {
-                    // Change button caption
-                    this.runButton.Text = "&Run";
+            {
+                // Change button caption
+                this.runButton.Text = "&Run";
 
-                    // Set flag
-                    this.isRunning = false;
+                // Set flag
+                this.isRunning = false;
 
-                    // TODO Stop run code
-                }
+                // TODO Stop run code
+            }
         }
 
         /*/// <summary>
